@@ -1,12 +1,9 @@
-// window.alert("ola")
 const listPoke = document.querySelector(".list-poke");
 const searchInput = document.querySelector(".search");
-// console.log(arrayCards)
 
 const URL = "https://pokeapi.co/api/v2/pokemon?limit=4&offset=0";
 const nomeURL = "https://pokeapi.co/api/v2/pokemon/";
 
-//cria os elementos da dom
 function createElementCard(info) {
   //criando elemento
   let li = document.createElement("li");
@@ -50,7 +47,6 @@ function createElementCard(info) {
   especialDefense.innerHTML = `${info.stats[4].stat.name}: ${info.stats[4].base_stat}`;
   speed.innerHTML = `${info.stats[5].stat.name}: ${info.stats[5].base_stat}`;
 
-  // console.log(info)
 
   contentImg.appendChild(img);
 
@@ -68,19 +64,13 @@ function createElementCard(info) {
   li.appendChild(attributes);
 
   listPoke.appendChild(li);
-
-  return li;
 }
 
-//array para guardar os dados da requisição
+//data pokemons
 let arrayDePokemons = [];
 
-//salva dados no local storage
-function saveLocalStorage(array) {
-  localStorage.setItem("dados", JSON.stringify(array));
-}
 
-///buscando dados da api e jogando na funcao create
+///add dados local storage
 fetch(URL)
   .then((response) => response.json())
   .then((data) =>
@@ -125,6 +115,4 @@ fetch(URL)
     }
   });
 
-//funcao que filtra cards
 
-// console.log(createElementCard(infoPoke))
