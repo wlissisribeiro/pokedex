@@ -1,7 +1,7 @@
 const listPoke = document.querySelector(".list-poke");
 const searchInput = document.querySelector(".search");
 
-const URL = "https://pokeapi.co/api/v2/pokemon?limit=4&offset=0";
+const URL = "https://pokeapi.co/api/v2/pokemon?limit=10&offset=0";
 const nomeURL = "https://pokeapi.co/api/v2/pokemon/";
 
 function createElementCard(info) {
@@ -47,7 +47,6 @@ function createElementCard(info) {
   especialDefense.innerHTML = `${info.stats[4].stat.name}: ${info.stats[4].base_stat}`;
   speed.innerHTML = `${info.stats[5].stat.name}: ${info.stats[5].base_stat}`;
 
-
   contentImg.appendChild(img);
 
   attributes.appendChild(hp);
@@ -67,8 +66,6 @@ function createElementCard(info) {
 }
 
 //data pokemons
-let arrayDePokemons = [];
-
 
 ///add dados local storage
 fetch(URL)
@@ -77,42 +74,34 @@ fetch(URL)
     data["results"].map((item) =>
       fetch(nomeURL + item.name)
         .then((response) => response.json())
-        .then((data) => arrayDePokemons.push(data))
-        .then(() =>
-          localStorage.setItem("dados", JSON.stringify(arrayDePokemons))
-        )
+        .then((data) => createElementCard(data))
+        .then(() => document.querySelectorAll(".poke"))
+        .then((listaNode) => {
+
+          searchInput.addEventListener("input", filterCards);
+
+          function filterCards() {
+            if (searchInput.value !== "") {
+              for (const card of listaNode) {
+                let nomepokemon = card
+                  .querySelector(".nome-poke")
+                  .textContent.toLocaleLowerCase();
+
+                let valueInput = searchInput.value.toLocaleLowerCase();
+
+                if (!nomepokemon.includes(valueInput)) {
+                  card.style.display = "none";
+                } else {
+                  card.style.display = "block";
+                }
+              }
+            } else {
+              for (const card of listaNode) {
+                card.style.display = "block";
+              }
+            }
+          }
+        })
     )
   )
-  .then(() => {
-    let arrayPokemonsSaved = JSON.parse(localStorage.getItem("dados"));
-    arrayPokemonsSaved.map((item) => createElementCard(item));
-  })
-  .then(() => {
-    const arrayCards = document.querySelectorAll(".poke");
-
-    searchInput.addEventListener("input", filterCards);
-
-    function filterCards() {
-      if (searchInput.value !== "") {
-        for (const card of arrayCards) {
-          let nomepokemon = card
-            .querySelector(".nome-poke")
-            .textContent.toLocaleLowerCase();
-
-          let valueInput = searchInput.value.toLocaleLowerCase();
-
-          if (!nomepokemon.includes(valueInput)) {
-            card.style.display = "none";
-          } else {
-            card.style.display = "block";
-          }
-        }
-      } else {
-        for (const card of arrayCards) {
-          card.style.display = "block";
-        }
-      }
-    }
-  });
-
-
+  .catch(error => console.log(error))
