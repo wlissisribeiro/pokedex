@@ -1,7 +1,7 @@
 const listPoke = document.querySelector(".list-poke");
 const searchInput = document.querySelector(".search");
 
-const URL = "https://pokeapi.co/api/v2/pokemon?limit=5&offset=0";
+const URL = "https://pokeapi.co/api/v2/pokemon?limit=300&offset=0";
 const nomeURL = "https://pokeapi.co/api/v2/pokemon/";
 
 
