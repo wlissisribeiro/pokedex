@@ -14,12 +14,21 @@
     gap: 40px;
 }
 
+.title{
+    font-size: 60px;
+    font-weight: bold;
+    color: #333;
+}
+
 .content-input{
     width: 400px;
     border: 1px solid silver;
     border-radius: 40px;
     height: 50px;
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 .content-input .search{
     width: 100%;
@@ -28,6 +37,8 @@
     outline: none;
     padding: 0px 20px;
     font-size: 18px;
+    background-color: #333;
+    color: gold;
 }
 
 .list-poke{
@@ -39,17 +50,20 @@
     gap: 20px;
 }
 .list-poke .poke{
-    width: 200px;
-    height: auto;
+    width: 230px;
+    height: 400px;
     box-shadow: 0px 0px 4px black;
     padding: 10px;
-    transition: .5s ease
+    transition: .2s ease;
+    background-color: rgb(237, 237, 237);
+    cursor: pointer;
 }
 .list-poke .poke:hover{
-  transform: scale(1.1);
+  transform: scale(1.02);
 }
 
 .list-poke .poke .nome-poke{
+    margin-top: 10px;
     text-align: center;
     color: coral;
     text-transform: capitalize;
@@ -59,6 +73,7 @@
     display: flex;
     flex-direction: column;
     gap: 4px;
+    padding: 5px;
 }
 
 .list-poke .poke .attributes .tipo{
@@ -70,14 +85,36 @@
     font-size: 14px;
 }
 
-.list-poke .poke .content-img {
+ .contentimg {
     width: 100%;
-    padding: 50px 50px 10px 50px;
+    height: 38%;
+    object-fit: cover;
     display: flex;
     justify-content: center;
-    background-color: thistle;
+    position: relative;
 }
-.list-poke .poke .content-img .img{
-    /* width: 50px;
-    height: 50px; */
+.list-poke .poke .contentimg .img{
+    object-fit: cover;
+    position: absolute;
+    bottom: 0;
+}
+
+.lupa{
+    width: 20px;
+    position: absolute;
+    right: 15px;
+}
+
+@media (max-width:425px) {
+    .content-input{
+        width: 300px ;
+    }
+
+    .content-input .search:placeholder-shown{
+        color: transparent;
+    }
+    
+    .title{
+        font-size: 40px;
+    }
 }

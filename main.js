@@ -11,8 +11,8 @@ function createElementCard(info) {
   li.classList.add("poke");
 
   let contentImg = document.createElement("div");
-  contentImg.style.backgroundImage = "";
-  contentImg.classList.add("content-img");
+//   contentImg.style.backgroundImage = "";
+  contentImg.classList.add("contentimg");
 
   let contentName = document.createElement("div");
 
